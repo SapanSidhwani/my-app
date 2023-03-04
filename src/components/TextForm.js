@@ -6,30 +6,40 @@ export default function TextForm(props) {
     const handleUpClick = () => {
         let newText = text.toUpperCase();
         setText(newText);
+        props.showAlert("Converted to Upper Case!", "success");
     }
 
     const handleLoClick = () => {
         let newText = text.toLowerCase();
         setText(newText);
+        props.showAlert("Converted to Lower Case!", "success");
     }
     const handleclearText = () => {
         setText('');
+        props.showAlert("Text Cleared!", "success");
     }
     const handleCopy = () => {
         let newText = document.getElementById('floatingTextarea');
         newText.select();
         navigator.clipboard.writeText(newText.value);
+        props.showAlert("Copied to Clipboard!", "success");
     }; 
     const extraSpaces = () => {
         let newText = text.split(/[ ] +/) ;
         setText(newText.join(' '));
+        props.showAlert("Extra spaces have been moved out!", "success");
     };
 
     function countWords() {
-        if(text.length === 0)
-            return 0;
-        else
-            return text.split(" ").length;
+
+        let arr = text.split(" ");
+        let cnt = 0;
+        
+        for(let i=0; i<arr.length; i++){
+            if(arr[i].length !== 0)
+                cnt++;
+        }
+        return cnt;
     }
     const handleOnChange = (event) => {
         setText(event.target.value);
