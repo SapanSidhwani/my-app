@@ -9,7 +9,7 @@ function App() {
     {/* Navbar is component , title and about is */}
       <Navbar title="TextUtils" about="About Us" />
 
-      <TextForm/>
+      <TextForm heading="Enter the text to analyze below" />
 
     </>
   );
