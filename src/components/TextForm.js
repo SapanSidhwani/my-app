@@ -43,7 +43,7 @@ export default function TextForm(props) {
                 <h2>{props.heading}</h2>
                 <textarea className="form-control" id="floatingTextarea" rows={8} value={text} onChange={handleOnChange}></textarea>
 
-                <div className="row mt-2">
+                <div className="row mt-2 g-3">
                     <div className="col-auto">
                         <button className="btn btn-primary" onClick={handleUpClick}>to UpperCase</button>
                     </div>
@@ -68,7 +68,7 @@ export default function TextForm(props) {
             <p> { countWords() } words and { text.length } characters </p>
             <p> { 0.008 * countWords() } minutes read </p>
             <p>Preview</p>
-            <p> { text } </p>
+            <p> { text.length > 0 ? text : "Enter something in the text box to preview it here" } </p>
         </div>
     </div>
   )
