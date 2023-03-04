@@ -8,13 +8,24 @@ export default function TextForm(props) {
         setText(newText);
     }
 
-    const handleLoClick = (event) => {
+    const handleLoClick = () => {
         let newText = text.toLowerCase();
         setText(newText);
     }
+    const handleclearText = () => {
+        setText('');
+    }
+    const handleCopy = () => {
+        let newText = document.getElementById('floatingTextarea');
+        newText.select();
+        navigator.clipboard.writeText(newText.value);
+    }; 
+    const extraSpaces = () => {
+        let newText = text.split(/[ ] +/) ;
+        setText(newText.join(' '));
+    };
 
     function countWords() {
-
         if(text.length === 0)
             return 0;
         else
@@ -39,6 +50,15 @@ export default function TextForm(props) {
                     <div className="col-auto">
                         <button className="btn btn-primary" onClick={handleLoClick}>to LowerCase</button>
                     </div>
+                    <div className="col-auto">
+                        <button className="btn btn-primary" onClick={handleclearText}>Clear Text</button>
+                    </div>
+                    <div className="col-auto">
+                        <button className="btn btn-primary" onClick={handleCopy}>Copy Text</button>
+                    </div>
+                    <div className="col-auto">
+                        <button className="btn btn-primary" onClick={extraSpaces}>Extra Spaces</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -46,7 +66,7 @@ export default function TextForm(props) {
         <div className="container my-3">
             <h2>Your text summary</h2>
             <p> { countWords() } words and { text.length } characters </p>
-            <p> { 0.008 * text.split(" ").length } minutes read </p>
+            <p> { 0.008 * countWords() } minutes read </p>
             <p>Preview</p>
             <p> { text } </p>
         </div>
