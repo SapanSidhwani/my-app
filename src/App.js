@@ -12,6 +12,13 @@ function App() {
 
   const htmlEl = document.querySelector('html');
 
+  setInterval(() => {
+    document.title = "Install now";
+  }, 1500);
+  setInterval(() => {
+    document.title = `TextUtils - ${ mode }`;
+  }, 2500);
+
   const showAlert = (msg, typ) => {
     setAlert({
       message: msg,
