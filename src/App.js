@@ -1,23 +1,22 @@
+// npm i react-router-dom
 import './App.css';
 import React, { useState } from 'react';
-import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
-import Alert from './components/Alert';
-// import About from './components/About';
+import RootLayout from './Routes/RootLayout';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  // Route,
+  // Link,
+} from "react-router-dom";
+import About from './components/About';
 
 function App() {
 
   const [mode, setMode] = useState('light');
   const [alert, setAlert] = useState(null);
-
+  
   const htmlEl = document.querySelector('html');
-
-  setInterval(() => {
-    document.title = "Install now";
-  }, 1500);
-  setInterval(() => {
-    document.title = `TextUtils - ${ mode }`;
-  }, 2500);
 
   const showAlert = (msg, typ) => {
     setAlert({
@@ -28,6 +27,15 @@ function App() {
       setAlert(null);
     }, 2000);
   };
+
+ 
+  // setInterval(() => {
+  //   document.title = "Install now";
+  // }, 1500);
+
+  // setInterval(() => {
+  //   document.title = `TextUtils - ${ mode }`;
+  // }, 2500);
 
   const toggleMode = () => {
     if(mode === 'light'){
@@ -42,18 +50,30 @@ function App() {
     }
   };
 
+  const router = createBrowserRouter([
+
+    {
+      path: "/",
+      element: <RootLayout alert={ alert } title="TextUtils" about="About Us" mode={ mode } toggleMode={ toggleMode } />,
+      children:[
+      
+        {
+          path:'/',
+          element: <TextForm showAlert={ showAlert } heading="Enter the text to analyze below" />
+        },
+        {
+          path: "/about",
+          element: <About/> 
+        }
+      ]
+    }
+  
+    
+  ]);
+
   return (
     <>
-
-      {/* Navbar is component , title and about is props*/}
-      <Navbar title="TextUtils" about="About Us" mode={ mode } toggleMode={ toggleMode }/>
-
-      <Alert alert={ alert }/>
-
-      <TextForm showAlert={ showAlert } heading="Enter the text to analyze below" />
-
-      {/* <About/> */}
-
+      <RouterProvider router={router} />
     </>
   );
 }
