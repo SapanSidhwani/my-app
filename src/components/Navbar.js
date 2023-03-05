@@ -5,10 +5,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 export default function Navbar(props) {
-  const picker = () => {
-    const change = document.querySelectorAll('input')[0].value;
-    document.body.style.background = change;
-  }
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
@@ -30,9 +27,6 @@ export default function Navbar(props) {
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
         <button className="btn btn-outline-success" type="submit">Search</button>
       </form> */}
-          <div className='d-flex me-2'> 
-            <input type="color" className="form-control form-control-color" id="exampleColorInput" defaultValue="#563d7c" onChange={ picker }  title="Choose your color" />
-          </div>
           <div className="form-check form-switch d-flex">
             <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
               onClick={props.toggleMode} />

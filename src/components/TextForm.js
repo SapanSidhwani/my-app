@@ -19,9 +19,10 @@ export default function TextForm(props) {
     }
     const handleCopy = () => {
         let newText = document.getElementById('floatingTextarea');
-        newText.select();
+        // newText.select();
+        // navigator.clipboard.writeText(newText.value);
+        // document.getSelection().removeAllRanges();
         navigator.clipboard.writeText(newText.value);
-        document.getSelection().removeAllRanges();
         props.showAlert("Copied to Clipboard!", "success");
     };
     const extraSpaces = () => {
@@ -36,7 +37,7 @@ export default function TextForm(props) {
 
     const [text, setText] = useState("Enter text here");
 
-    let words = text.split(" ").filter((element) => { return element.length !== 0 }).length;
+    let words = text.split(/\s+/).filter((element) => { return element.length !== 0 }).length;
 
     return (
         <div>
